@@ -1,0 +1,10 @@
+1> 21e6a3a1792e1e4865d3b2fa7c4534269801a099 : Este es el merge de los archivos de ejercicios pasados
+que vienen desde la rama past_exercises a la rama main.
+
+2> 66a012cca23a34d284a94e2f40a993c1f5d9dc08 : Este el commit donde se agregaron los ejercicios viejos 
+al repositorio remoto.
+
+
+3> 12537704adfcd97037a19aea070c973e8dceef77 : Este commit fue para borrar todos los archivos para 
+volver a empezar desde cero.
+
