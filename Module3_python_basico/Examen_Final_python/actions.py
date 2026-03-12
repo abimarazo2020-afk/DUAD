@@ -1,12 +1,9 @@
 '''                             MODULO DE FUNCIONES                             '''
-
-
-#Lista de diccionarios global
-list_dic = [] 
+ 
 
 
 #Funcion para pedir la informacion del estudiante
-def student_information():
+def student_information(list_dic):
     name_student = validate_student_name()
     section = validate_student_section()
         
@@ -17,7 +14,6 @@ def student_information():
 
 
     spanish_note = validate_notes('spanish')
-    math_note = validate_notes('math')
     english_note = validate_notes('english')
     scient_note = validate_notes('scient')
     social_note = validate_notes('social')
@@ -27,7 +23,6 @@ def student_information():
         'student_name' : name_student,
         'student_section' : section,
         'spanish_note' : spanish_note,
-        'math_note' : math_note,
         'english_note' : english_note,
         'scient_note' : scient_note,
         'social_note' : social_note
@@ -38,10 +33,10 @@ def student_information():
 
 
 #Funcion que valida el nombre del estudiante
-def validate_student_name():
+def validate_student_name(): # cambiar agregar espacios y apellidos 
     while True:
         student_name = input('Enter your student name: ')
-        if student_name.isalpha():
+        if student_name.replace(" ", "").isalpha():
             return student_name
         else:
             print('The name must contain only letters')
@@ -55,10 +50,25 @@ def validate_student_section():
     while True:
         section = input("Enter student section (example 11B): ")
 
-        if section:
-            return section
+        if len(section) != 3:
+            print("Section must have 3 characters")
+            continue
 
-        print("Section cannot be empty")
+        if not section[0:2].isdigit():
+            print("First two characters must be numbers")
+            continue
+
+        if not section[2].isalpha():
+            print("Last character must be a letter")
+            continue
+
+        return section.upper()
+
+# len(section) != 3 >>>> La sección debe tener 3 caracteres
+# section[:2].isdigit() >>> Los dos primeros deben ser números
+# section[2].isalpha() >>>>> El tercer carácter debe ser letra
+# return section.upper() esto convierte 11b → 11B
+
 
 
 
@@ -80,7 +90,7 @@ def validate_notes(subject_note):
 
 
 #Funcion para borrar estudiante
-def delete_student():
+def delete_student(list_dic):
     deleted_user = input('Enter the student name you want to remove: ')
 
     for student in range(len(list_dic)):
@@ -96,21 +106,20 @@ def delete_student():
 
 
 #Funcion para obtener el promedio individual de cada estudiante > con parametro estudiante 
-def calculate_student_average(student):
+def calculate_student_average(student): # cambiar quitar math 
     spanish_note = student["spanish_note"]
-    math_note = student["math_note"]
     english_note = student["english_note"]
     scient_note = student["scient_note"]
     social_note = student["social_note"]
 
-    average = (spanish_note + math_note + english_note + social_note + scient_note) / 5
+    average = (spanish_note + english_note + social_note + scient_note) / 4
     return average # para usar despues el resultado
 
 
 
 
 #Funcion que busca el nombre del estudiante y llama a la funcion que saca el promedio 
-def get_student_average():
+def get_student_average(list_dic):
     student_name = input('Enter the student name to get the average: ')
     
     for student in list_dic:
@@ -125,7 +134,7 @@ def get_student_average():
 
 
 #Funcion para generar un promedio entre todos los estudiantes 
-def get_general_average():
+def get_general_average(list_dic):
 
     if not list_dic:
         print("No students registered")
@@ -140,7 +149,7 @@ def get_general_average():
 
 
 #Funcion para sacar el top 3 de los estudiante 
-def get_top_three_students():
+def get_top_three_students(list_dic):
 
     second_list = []
 
@@ -159,7 +168,7 @@ def get_top_three_students():
  
 
 #Funcion para enlistar los estudiantes reprobados
-def get_failed_students():
+def get_failed_students(list_dic):
     
     failed_students_list = []
     
@@ -174,24 +183,20 @@ def get_failed_students():
         section = student["student_section"]
         spanish_subject = student["spanish_note"]
         english_subject = student["english_note"]
-        math_subject = student["math_note"]
         scient_subject = student["scient_note"]
         social_subject = student["social_note"]
 
         #comparaciones de las notas a agregar a la lista de materias
-        if spanish_subject <= 60:
+        if spanish_subject < 60:
             subjects_list.append(('spanish', spanish_subject))
         
-        if english_subject <= 60:
+        if english_subject < 60:
             subjects_list.append(('english', english_subject))
         
-        if math_subject <= 60:
-            subjects_list.append(('math', math_subject))
-        
-        if scient_subject <= 60:
+        if scient_subject < 60:
             subjects_list.append(('scient', scient_subject))
         
-        if social_subject <= 60:
+        if social_subject < 60:
            subjects_list.append(('social', social_subject))
 
         if subjects_list:
@@ -201,7 +206,7 @@ def get_failed_students():
     print(failed_students_list)
 
 #funcion que muestra todos los estudiantes
-def show_all_students():
+def show_all_students(list_dic):
 
     if not list_dic:
         print("No students registered")

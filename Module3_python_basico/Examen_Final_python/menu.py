@@ -3,7 +3,7 @@
 import data
 import actions
 
-def show_menu():
+def show_menu(list_dic):
     while True:
 
         print("\n----- STUDENT SYSTEM MENU -----")
@@ -15,48 +15,48 @@ def show_menu():
         print("6. Show failed students")
         print("7. Delete student")
         print("8. Export student data")
-        print("10. Import student")
-        print("9. Exit")
+        print("9. Import student")
+        print("10. Exit")
 
         try:
-            option = int(input("Choose an option (1-9): "))
+            option = int(input("Choose an option (1-10): "))
         except ValueError:
             print("Invalid option. Enter a number.")
             continue
 
         if option == 1:
-            actions.student_information()
+            actions.student_information(list_dic)
 
         elif option == 2:
-            actions.show_all_students()
+            actions.show_all_students(list_dic)
 
         elif option == 3:
-            actions.get_student_average()
+            actions.get_student_average(list_dic)
 
         elif option == 4:
-            actions.get_top_three_students()
+            actions.get_top_three_students(list_dic)
 
         elif option == 5:
-            actions.get_general_average()
+            actions.get_general_average(list_dic)
 
         elif option == 6:
-            actions.get_failed_students()
+            actions.get_failed_students(list_dic)
 
         elif option == 7:
-            actions.delete_student()
+            actions.delete_student(list_dic)
 
         elif option == 8: #to export
-            data.write_data_in_CSV("students.csv", actions.list_dic)
+            data.write_data_in_CSV("students.csv", list_dic)
 
-        elif option == 9:
-            data.import_CSV_file("students.csv")
+        elif option == 9: # to import
+            data.import_CSV_file("students.csv", list_dic) # se pasa la lista para llenarla
 
         elif option == 10:
             print("Exiting program...")
             break
 
         else:
-            print("Option must be between 1 and 9.")
+            print("Option must be between 1 and 10.")
 
 
 

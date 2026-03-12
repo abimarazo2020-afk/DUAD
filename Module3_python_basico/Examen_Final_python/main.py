@@ -2,8 +2,10 @@
 
 from menu import show_menu
 
+list_dic = []
+
 def main():
-    show_menu()
+    show_menu(list_dic)
 
 if __name__ == "__main__":
     main()
