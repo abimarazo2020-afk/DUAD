@@ -19,7 +19,7 @@ def write_data_in_CSV(file_path, students_list): #students_list va a guardar lis
 def import_CSV_file(file_path, list_dic):
     try:
 
-        list_dic.clear #limpia la lista para que cada vez que se importa este vacia
+        list_dic.clear() #limpia la lista para que cada vez que se importa este vacia
 
         with open(file_path, 'r', newline='', encoding='utf-8') as file:
             reader = csv.DictReader(file)

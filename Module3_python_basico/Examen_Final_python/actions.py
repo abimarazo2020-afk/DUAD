@@ -91,16 +91,23 @@ def validate_notes(subject_note):
 
 #Funcion para borrar estudiante
 def delete_student(list_dic):
-    deleted_user = input('Enter the student name you want to remove: ')
+    name_to_delete = input('Enter the student name you want to remove: ')
+    section_to_delete = validate_student_section()
+
 
     for student in range(len(list_dic)):
-        if list_dic[student]["student_name"] == deleted_user: #se accede a su posicion y luego al dic.
-            list_dic.pop(student)
-            print("Student removed")
-            print(list_dic)
-            return
+        if list_dic[student]["student_name"] == name_to_delete: #se accede a su posicion y luego al dic.
+            if list_dic[student]["student_section"] == section_to_delete:
 
-    print("Student not found")
+                confirm = input('Are you sure you want to delete the user? (y/n): ')
+                if confirm.lower() == 'y':
+                    list_dic.pop(student)
+                    print("Student removed")
+                    print(list_dic)
+                    
+                return #con el return terminamos el ciclo
+
+    print("Student not found") #si no se encuentra el student print this
 
 
 

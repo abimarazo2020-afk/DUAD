@@ -2,9 +2,9 @@
 
 from menu import show_menu
 
-list_dic = []
 
 def main():
+    list_dic = []
     show_menu(list_dic)
 
 if __name__ == "__main__":
