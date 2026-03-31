@@ -8,11 +8,12 @@ Valide que ningún valor sea negativo. Si lo es, lance una excepción con un men
 
 class Rectangle:
     def __init__(self, width, height):
-        if self.width < 0 or self.height < 0: #solo parametros, no se han guardado
-            raise ValueError('The width and height cant be negatives numbers')
-             
         self.width = width #guardamos el atributo
         self.height = height
+        
+        if self.width < 0 or self.height < 0: #solo parametros, no se han guardado
+            raise ValueError('The width and height cant be negatives numbers')
+
         
     def get_area(self): #formula ancho/base * altura
         return self.width * self.height
