@@ -1,0 +1,102 @@
+'''Cree una clase LinkedList con los métodos:
+insert_front(data): Inserta al inicio
+insert_back(data): Inserta al final
+delete(data): Elimina el primer nodo con el valor dado
+print_all(): Imprime todos los valores
+'''
+
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        
+        
+class LinkedList:
+    def __init__(self):
+        self.head = None
+        
+        
+    def insert_front(self, data):
+        node_1 = Node(data)
+        
+        if not self.head: #si no hay head:
+            self.head = node_1
+            return
+            
+        node_1.next = self.head #el next del head sera:
+        self.head = node_1 #asignamos el new head
+            
+        
+    def insert_back(self, data):
+        node_2 = Node(data)
+        
+        if not self.head:
+            self.head = node_2 
+            return
+            
+        tem_head = self.head #variable para recorrer la lista
+        
+        while tem_head.next is not None: #meta encontrar el ultimo node, mientras haya un sig:
+            tem_head = tem_head.next #avanza
+            
+        tem_head.next = node_2 #aqui metemos el ultimo nodo al final
+            
+
+    def delete(self, data):
+
+        # Lista vacía 
+        if not self.head:
+            return
+
+        # Caso especial: borrar el head ya que el prev no existe aun
+        if self.head.data == data:
+            self.head = self.head.next #se mueve el head al sig node
+            return
+
+        #Creámos dos punteros temporales.
+        prev = None
+        current = self.head
+        #Esto es NECESARIO porque para borrar un nodo necesitás modificar el .next del nodo anterior.
+
+        # Buscar el nodo con el valor
+        while current and current.data != data: # “el valor guardado dentro del nodo actual"
+            prev = current
+            current = current.next
+
+        # Si no se encontró
+        if not current:
+            return
+
+        # Saltar el nodo actual
+        prev.next = current.next #esto elimina el nodo
+
+      
+    def print_all(self):
+        temp = self.head #tem para recorrer 
+        while temp: #mientras exista 
+            print(temp.data, end= "-") #que los imprima separados por linea
+            temp = temp.next #se mueve al sig y el loop vuelve a empezar
+            
+        print()
+        
+        
+        
+
+# Crear una lista
+lista = LinkedList()
+
+# Insertar nodos
+lista.insert_front(10)
+lista.insert_front(20)
+lista.insert_back(30)
+lista.insert_back(40)
+
+# Imprimir lista
+lista.print_all()
+
+# Eliminar un nodo
+lista.delete(20)
+
+# Imprimir de nuevo
+lista.print_all()
